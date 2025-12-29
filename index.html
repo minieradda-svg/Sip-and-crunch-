@@ -2589,8 +2589,8 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#menu">Menu</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <!-- Admin Mode Button -->
-                    <li><button class="admin-mode-btn" id="admin-mode-btn">
+                    <!-- Admin Mode Button - FIXED with onclick -->
+                    <li><button class="admin-mode-btn" id="admin-mode-btn" onclick="setMode('admin')">
                         <i class="fas fa-user-shield"></i> Admin
                     </button></li>
                 </ul>
@@ -2657,9 +2657,9 @@
                     <span data-i18n="nav.contact">Contact</span>
                 </a>
             </li>
-            <!-- Admin Mode Button for Mobile -->
+            <!-- Admin Mode Button for Mobile - FIXED with onclick -->
             <li role="none">
-                <button class="admin-mode-btn" id="mobile-admin-mode-btn" role="menuitem">
+                <button class="admin-mode-btn" id="mobile-admin-mode-btn" role="menuitem" onclick="closeMobileMenu(); setMode('admin');">
                     <i class="fas fa-user-shield"></i>
                     <span>Admin</span>
                 </button>
@@ -3266,7 +3266,6 @@
                             <i class="fab fa-twitter"></i>
                         </a>
                     </div>
-                </div>
             </div>
             
             <div class="copyright">
@@ -3282,7 +3281,7 @@
         const CONFIG = {
             COMPANY_NAME: 'Sip&Crunch',
             INSTAGRAM_URL: 'https://www.instagram.com/hello.sipandcrunch?igsh=Znd5aWx4bXc0Z2Vn',
-            ADMIN_PASSWORD: 'sip123', // CHANGE THIS BEFORE GOING LIVE!
+            ADMIN_PASSWORD: 'sipadmin123', // CHANGE THIS BEFORE GOING LIVE!
             CANCELLATION_WINDOW: 15 * 60 * 1000, // 15 minutes in milliseconds
             ORDERS_STORAGE_KEY: 'sipcrunch_orders',
             ADMIN_SESSION_KEY: 'sipcrunch_admin_session'
@@ -5000,13 +4999,6 @@
                 });
             });
             
-            // Admin mode buttons
-            dom.adminModeBtn?.addEventListener('click', () => setMode('admin'));
-            dom.mobileAdminModeBtn?.addEventListener('click', () => {
-                closeMobileMenu();
-                setMode('admin');
-            });
-            
             // Cart
             dom.desktopCartIcon?.addEventListener('click', openCartModal);
             dom.mobileCartLink?.addEventListener('click', (e) => {
@@ -5271,6 +5263,8 @@
         
         // Expose goToStep globally for use in onclick handlers
         window.goToStep = goToStep;
+        window.setMode = setMode;
+        window.closeMobileMenu = closeMobileMenu;
     </script>
 </body>
 </html>
