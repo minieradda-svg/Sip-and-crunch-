@@ -24,6 +24,8 @@
             --secondary: #8B4513;
             --accent: #228B22;
             --accent-red: #D35400;
+            --success: #27ae60;
+            --error: #e74c3c;
             --dark: #2C1810;
             --light: #FFF8DC;
             --text: #3E2723;
@@ -93,6 +95,9 @@
         .text-center { text-align: center; }
         .mt-20 { margin-top: 20px; }
         .mb-20 { margin-bottom: 20px; }
+        .hidden { display: none !important; }
+        .success { color: var(--success); }
+        .error { color: var(--error); }
 
         /* ====== LANGUAGE SWITCHER ====== */
         .language-switcher {
@@ -149,19 +154,7 @@
 
         @media (max-width: 768px) {
             header {
-                padding-left: 70px; /* Make space for admin button */
-            }
-        }
-
-        @media (max-width: 480px) {
-            header {
-                padding-left: 60px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            header {
-                padding-left: 55px;
+                padding-left: 0;
             }
         }
 
@@ -180,6 +173,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            cursor: pointer;
         }
 
         .logo span {
@@ -258,7 +252,7 @@
             gap: 12px;
         }
 
-        /* Mobile Menu Button - FIXED SIZE & BETTER VISIBILITY */
+        /* Mobile Menu Button */
         .mobile-menu-btn {
             display: flex;
             flex-direction: column;
@@ -408,6 +402,152 @@
             color: var(--accent-red);
             text-transform: uppercase;
             font-size: 1.2rem;
+        }
+
+        /* ====== DELIVERY LOCATION SECTION ====== */
+        .delivery-location {
+            background: white;
+            padding: 40px 0;
+        }
+
+        .location-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .location-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--primary);
+        }
+
+        .location-form input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .location-form input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .check-pincode-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .check-pincode-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .location-result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: var(--radius);
+            display: none;
+        }
+
+        .location-result.success {
+            display: block;
+            background: #d4edda;
+            border: 2px solid var(--success);
+            color: #155724;
+        }
+
+        .location-result.error {
+            display: block;
+            background: #f8d7da;
+            border: 2px solid var(--error);
+            color: #721c24;
+        }
+
+        .delivery-areas {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--light);
+            border-radius: var(--radius);
+        }
+
+        .delivery-areas h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .pincode-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pincode-badge {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            border: 2px solid var(--primary);
+        }
+
+        /* ====== CHECKOUT FORM ====== */
+        .checkout-form {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+            display: none;
+        }
+
+        .checkout-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
 
         /* ====== CART MODAL ====== */
@@ -1173,6 +1313,7 @@
             background: var(--dark);
             color: white;
             padding: 60px 0 30px;
+            position: relative;
         }
 
         .footer-content {
@@ -1246,6 +1387,10 @@
             font-size: 0.9rem;
         }
 
+        .copyright-text {
+            cursor: pointer;
+        }
+
         /* ====== NOTIFICATION ====== */
         .notification {
             position: fixed;
@@ -1267,7 +1412,7 @@
             opacity: 1;
         }
 
-        /* ====== ADMIN PANEL (HIDDEN) ====== */
+        /* ====== ADMIN PANEL ====== */
         .admin-panel {
             display: none !important;
             position: fixed;
@@ -1542,35 +1687,6 @@
             font-style: italic;
         }
 
-        /* ====== ADMIN ACCESS BUTTON (HIDDEN) ====== */
-        .admin-access-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: rgba(193, 154, 107, 0.1);
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0.3;
-            transition: var(--transition);
-            z-index: 1003;
-            padding: 8px;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .admin-access-btn:hover {
-            opacity: 1;
-            background: rgba(193, 154, 107, 0.2);
-            transform: scale(1.1);
-        }
-
         /* ====== RESPONSIVE DESIGN ====== */
         @media (min-width: 769px) {
             .mobile-controls {
@@ -1643,23 +1759,20 @@
                 height: 3px;
             }
             
-            /* Admin button mobile styles */
-            .admin-access-btn {
-                top: 15px;
-                left: 15px;
-                font-size: 1.3rem;
-                width: 45px;
-                height: 45px;
-                opacity: 0.25;
-                background: rgba(193, 154, 107, 0.15);
-            }
-            
             .admin-panel {
                 top: 70px;
                 width: 90%;
                 max-width: 350px;
                 right: 5%;
                 left: 5%;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkout-form {
+                padding: 20px;
             }
         }
 
@@ -1717,16 +1830,6 @@
                 font-size: 1rem;
             }
             
-            /* Admin button small mobile styles */
-            .admin-access-btn {
-                top: 10px;
-                left: 10px;
-                font-size: 1.2rem;
-                width: 40px;
-                height: 40px;
-                opacity: 0.3;
-            }
-            
             .admin-panel {
                 top: 65px;
                 width: 95%;
@@ -1764,15 +1867,6 @@
             .logo {
                 font-size: 1.5rem;
             }
-            
-            /* Admin button extra small mobile styles */
-            .admin-access-btn {
-                top: 8px;
-                left: 8px;
-                width: 36px;
-                height: 36px;
-                font-size: 1.1rem;
-            }
         }
     </style>
 </head>
@@ -1780,15 +1874,10 @@
     <!-- Skip to content link -->
     <a href="#main-content" class="sr-only">Skip to main content</a>
 
-    <!-- Hidden Admin Access Button -->
-    <button class="admin-access-btn" id="admin-access-btn" aria-label="Admin panel" title="Admin Panel">
-        <i class="fas fa-user-shield"></i>
-    </button>
-
     <!-- Header -->
     <header>
         <div class="container nav-container">
-            <a href="#" class="logo" aria-label="Sip&Crunch Home">
+            <a href="#" class="logo" id="logo" aria-label="Sip&Crunch Home">
                 <i class="fas fa-cookie-bite"></i>
                 Sip&<span>Crunch</span>
             </a>
@@ -1803,8 +1892,9 @@
                 
                 <ul class="desktop-nav-links">
                     <li><a href="#home" class="active">Home</a></li>
-                    <li><a href="#about">About</a></li>
                     <li><a href="#menu">Menu</a></li>
+                    <li><a href="#delivery">Delivery</a></li>
+                    <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 
@@ -1867,15 +1957,15 @@
                 </a>
             </li>
             <li role="none">
-                <a href="#about" id="mobile-about-link" role="menuitem">
-                    <i class="fas fa-info-circle"></i>
-                    <span data-i18n="nav.about">About</span>
-                </a>
-            </li>
-            <li role="none">
                 <a href="#menu" id="mobile-menu-link" role="menuitem">
                     <i class="fas fa-utensils"></i>
                     <span data-i18n="nav.menu">Menu</span>
+                </a>
+            </li>
+            <li role="none">
+                <a href="#delivery" id="mobile-delivery-link" role="menuitem">
+                    <i class="fas fa-truck"></i>
+                    <span>Delivery</span>
                 </a>
             </li>
             <li role="none">
@@ -1883,6 +1973,12 @@
                     <i class="fas fa-shopping-cart"></i>
                     <span data-i18n="nav.cart">Cart</span>
                     <span class="mobile-cart-count" id="mobile-cart-count">0</span>
+                </a>
+            </li>
+            <li role="none">
+                <a href="#about" id="mobile-about-link" role="menuitem">
+                    <i class="fas fa-info-circle"></i>
+                    <span data-i18n="nav.about">About</span>
                 </a>
             </li>
             <li role="none">
@@ -1975,6 +2071,77 @@
                         <i class="fas fa-utensils"></i> 
                         <span data-i18n="hero.cta">Order Now</span>
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Delivery Location Section -->
+        <section class="delivery-location" id="delivery">
+            <div class="container">
+                <h2 class="section-title">Delivery Area</h2>
+                <p class="text-center mb-20">We currently deliver only in selected areas of Mumbai</p>
+                
+                <div class="location-container">
+                    <div class="location-card">
+                        <h3 class="text-center">Check Delivery Availability</h3>
+                        <p class="text-center">Enter your pincode to check if we deliver to your area</p>
+                        
+                        <div class="location-form">
+                            <input type="text" id="pincode-input" maxlength="6" placeholder="Enter 6-digit pincode" aria-label="Enter your pincode">
+                            <button class="check-pincode-btn" id="check-pincode-btn">
+                                <i class="fas fa-search-location"></i> Check Delivery Availability
+                            </button>
+                        </div>
+                        
+                        <div id="location-result" class="location-result">
+                            <!-- Result will be shown here -->
+                        </div>
+                        
+                        <!-- Checkout Form (Hidden by default) -->
+                        <div class="checkout-form" id="checkout-form">
+                            <h3>Delivery Details</h3>
+                            <form id="delivery-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="customer-name">Full Name *</label>
+                                        <input type="text" id="customer-name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="customer-phone">Phone Number *</label>
+                                        <input type="tel" id="customer-phone" maxlength="10" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="customer-address">Full Address *</label>
+                                    <textarea id="customer-address" rows="3" required></textarea>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="customer-landmark">Landmark</label>
+                                        <input type="text" id="customer-landmark">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="customer-pincode">Pincode *</label>
+                                        <input type="text" id="customer-pincode" maxlength="6" required readonly>
+                                    </div>
+                                </div>
+                                
+                                <button type="button" class="checkout-btn" id="delivery-checkout-btn">
+                                    <i class="fas fa-shopping-bag"></i> Proceed to Checkout
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div class="delivery-areas">
+                            <h4>We Deliver in These Mumbai Areas:</h4>
+                            <div class="pincode-list" id="pincode-list">
+                                <!-- Pincodes will be populated by JavaScript -->
+                            </div>
+                            <p class="mt-20"><strong>Note:</strong> Delivery charges may apply based on distance. Free delivery for orders above ₹200.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2102,8 +2269,9 @@
                     <h4 data-i18n="footer.links.title">Quick Links</h4>
                     <ul>
                         <li><a href="#home" data-i18n="footer.links.home">Home</a></li>
-                        <li><a href="#about" data-i18n="footer.links.about">About Us</a></li>
                         <li><a href="#menu" data-i18n="footer.links.menu">Menu</a></li>
+                        <li><a href="#delivery">Delivery</a></li>
+                        <li><a href="#about" data-i18n="footer.links.about">About Us</a></li>
                         <li><a href="#contact" data-i18n="footer.links.contact">Contact</a></li>
                     </ul>
                 </div>
@@ -2125,7 +2293,7 @@
             </div>
             
             <div class="copyright">
-                <p data-i18n="footer.copyright">&copy; 2023 Sip&Crunch. All rights reserved. Made with ❤️ in Maharashtra.</p>
+                <p class="copyright-text" id="copyright-text" data-i18n="footer.copyright">&copy; 2023 Sip&Crunch. All rights reserved. Made with ❤️ in Maharashtra.</p>
                 <p data-i18n="footer.status">Currently operating online. Offline store coming soon!</p>
             </div>
         </div>
@@ -2140,7 +2308,11 @@
             INSTAGRAM_URL: 'https://www.instagram.com/hello.sipandcrunch?igsh=Znd5aWx4bXc0Z2Vn',
             WHATSAPP_NUMBER: '919999999999',
             CANCEL_TIME_LIMIT: 15, // minutes
-            ADMIN_PASSWORD: 'sipandcrunch123' // Simple password for admin access
+            ADMIN_PASSWORD: 'sipandcrunch123', // Simple password for admin access
+            MUMBAI_PINCODES: [
+                '400001', '400002', '400003', '400004', '400005',
+                '400006', '400007', '400008', '400009', '400010', '400011'
+            ]
         };
 
         // ====== INTERNATIONALIZATION ======
@@ -2241,10 +2413,29 @@
                 'notification.orderPlaced': 'New order placed by customer',
                 'notification.orderCancelled': 'Order cancelled by customer',
                 
+                // Delivery
+                'delivery.checkTitle': 'Check Delivery Availability',
+                'delivery.enterPincode': 'Enter 6-digit pincode',
+                'delivery.checkBtn': 'Check Delivery Availability',
+                'delivery.available': '🎉 Great news! We deliver to your area.',
+                'delivery.notAvailable': '😔 Sorry, we don\'t deliver to this pincode yet.',
+                'delivery.deliveryAreas': 'We Deliver in These Mumbai Areas:',
+                'delivery.note': 'Note: Delivery charges may apply based on distance. Free delivery for orders above ₹200.',
+                'delivery.detailsTitle': 'Delivery Details',
+                'delivery.fullName': 'Full Name *',
+                'delivery.phone': 'Phone Number *',
+                'delivery.address': 'Full Address *',
+                'delivery.landmark': 'Landmark',
+                'delivery.pincode': 'Pincode *',
+                'delivery.proceedCheckout': 'Proceed to Checkout',
+                
                 // Messages
                 'success.order': 'Order placed successfully!',
                 'success.contact': 'Message sent successfully!',
+                'success.deliveryAvailable': 'Delivery available in your area!',
                 'error.emptyCart': 'Your cart is empty!',
+                'error.invalidPincode': 'Please enter a valid 6-digit pincode',
+                'error.deliveryNotAvailable': 'Sorry, we don\'t deliver to this pincode yet.',
                 'error.general': 'Something went wrong. Please try again.'
             },
             mr: {
@@ -2343,10 +2534,29 @@
                 'notification.orderPlaced': 'ग्राहकाद्वारे नवीन ऑर्डर दिला',
                 'notification.orderCancelled': 'ग्राहकाद्वारे ऑर्डर रद्द केला',
                 
+                // Delivery
+                'delivery.checkTitle': 'डिलिव्हरी उपलब्धता तपासा',
+                'delivery.enterPincode': '6 अंकी पिनकोड प्रविष्ट करा',
+                'delivery.checkBtn': 'डिलिव्हरी उपलब्धता तपासा',
+                'delivery.available': '🎉 छान बातमी! आम्ही तुमच्या क्षेत्रात डिलिव्हरी करतो.',
+                'delivery.notAvailable': '😔 क्षमस्व, आम्ही अद्याप या पिनकोडवर डिलिव्हरी करत नाही.',
+                'delivery.deliveryAreas': 'आम्ही या मुंबई क्षेत्रांमध्ये डिलिव्हरी करतो:',
+                'delivery.note': 'नोंद: अंतरावर अवलंबून डिलिव्हरी शुल्क लागू होऊ शकते. ₹२०० पेक्षा जास्त ऑर्डरसाठी विनामूल्य डिलिव्हरी.',
+                'delivery.detailsTitle': 'डिलिव्हरी तपशील',
+                'delivery.fullName': 'पूर्ण नाव *',
+                'delivery.phone': 'फोन नंबर *',
+                'delivery.address': 'पूर्ण पत्ता *',
+                'delivery.landmark': 'लँडमार्क',
+                'delivery.pincode': 'पिनकोड *',
+                'delivery.proceedCheckout': 'चेकआउट करा',
+                
                 // Messages
                 'success.order': 'ऑर्डर यशस्वीरित्या झाले!',
                 'success.contact': 'संदेश यशस्वीरित्या पाठवला!',
+                'success.deliveryAvailable': 'तुमच्या क्षेत्रात डिलिव्हरी उपलब्ध आहे!',
                 'error.emptyCart': 'तुमची कार्ट रिकामी आहे!',
+                'error.invalidPincode': 'कृपया वैध 6-अंकी पिनकोड प्रविष्ट करा',
+                'error.deliveryNotAvailable': 'क्षमस्व, आम्ही अद्याप या पिनकोडवर डिलिव्हरी करत नाही.',
                 'error.general': 'काहीतरी चूक झाली. कृपया पुन्हा प्रयत्न करा.'
             }
         };
@@ -2407,12 +2617,17 @@
             currentOrder: JSON.parse(localStorage.getItem('currentOrder')) || null,
             adminNotifications: JSON.parse(localStorage.getItem('adminNotifications')) || [],
             adminPanelOpen: false,
-            cancelTimer: null
+            cancelTimer: null,
+            deliveryAvailable: false,
+            selectedPincode: '',
+            customerInfo: JSON.parse(localStorage.getItem('customerInfo')) || {}
         };
 
         // ====== DOM ELEMENTS ======
         const dom = {
             body: document.body,
+            logo: document.getElementById('logo'),
+            copyrightText: document.getElementById('copyright-text'),
             languageSwitcher: document.querySelectorAll('.language-switcher'),
             langButtons: document.querySelectorAll('.lang-btn'),
             mobileMenuBtn: document.getElementById('mobile-menu-btn'),
@@ -2433,16 +2648,30 @@
             notification: document.getElementById('notification'),
             navLinks: document.querySelectorAll('a[href^="#"]'),
             
-            // New elements
-            adminAccessBtn: document.getElementById('admin-access-btn'),
+            // Admin elements
             adminPanel: document.getElementById('admin-panel'),
             adminCloseBtn: document.getElementById('admin-close'),
             adminBody: document.getElementById('admin-body'),
             
+            // Order success modal
             orderSuccessModal: document.getElementById('order-success-modal'),
             orderIdDisplay: document.getElementById('order-id-display'),
             orderTimer: document.getElementById('order-timer'),
-            cancelOrderBtn: document.getElementById('cancel-order-btn')
+            cancelOrderBtn: document.getElementById('cancel-order-btn'),
+            
+            // Delivery elements
+            pincodeInput: document.getElementById('pincode-input'),
+            checkPincodeBtn: document.getElementById('check-pincode-btn'),
+            locationResult: document.getElementById('location-result'),
+            checkoutForm: document.getElementById('checkout-form'),
+            deliveryForm: document.getElementById('delivery-form'),
+            pincodeList: document.getElementById('pincode-list'),
+            customerName: document.getElementById('customer-name'),
+            customerPhone: document.getElementById('customer-phone'),
+            customerAddress: document.getElementById('customer-address'),
+            customerLandmark: document.getElementById('customer-landmark'),
+            customerPincode: document.getElementById('customer-pincode'),
+            deliveryCheckoutBtn: document.getElementById('delivery-checkout-btn')
         };
 
         // ====== INITIALIZATION ======
@@ -2453,6 +2682,9 @@
             // Load menu items
             renderMenuItems();
             
+            // Load pincode list
+            renderPincodeList();
+            
             // Update cart count
             updateCartCount();
             
@@ -2460,14 +2692,15 @@
             if (state.currentOrder && state.currentOrder.status === 'pending') {
                 const now = Date.now();
                 if (now < state.currentOrder.canCancelUntil) {
-                    // Still within cancellation period
                     showOrderSuccessModal(state.currentOrder);
                 } else {
-                    // Clear expired order
                     state.currentOrder = null;
                     localStorage.removeItem('currentOrder');
                 }
             }
+            
+            // Check URL for admin access
+            checkURLForAdminAccess();
             
             // Setup event listeners
             setupEventListeners();
@@ -2481,7 +2714,174 @@
             // Set form placeholders
             updateFormPlaceholders();
             
+            // Setup hidden admin access
+            setupHiddenAdminAccess();
+            
             console.log('✅ Website initialized successfully!');
+        }
+
+        // ====== HIDDEN ADMIN ACCESS ======
+        function setupHiddenAdminAccess() {
+            // 1. Triple-tap logo
+            let logoClickCount = 0;
+            let logoClickTimeout;
+            
+            dom.logo.addEventListener('click', (e) => {
+                e.preventDefault();
+                logoClickCount++;
+                
+                if (logoClickCount === 1) {
+                    logoClickTimeout = setTimeout(() => {
+                        logoClickCount = 0;
+                    }, 1000);
+                }
+                
+                if (logoClickCount === 3) {
+                    clearTimeout(logoClickTimeout);
+                    logoClickCount = 0;
+                    triggerAdminAccess();
+                }
+            });
+            
+            // 2. Long-press footer copyright text
+            let footerPressTimer;
+            let footerPressed = false;
+            
+            dom.copyrightText.addEventListener('mousedown', startFooterPress);
+            dom.copyrightText.addEventListener('touchstart', startFooterPress);
+            
+            dom.copyrightText.addEventListener('mouseup', endFooterPress);
+            dom.copyrightText.addEventListener('touchend', endFooterPress);
+            dom.copyrightText.addEventListener('mouseleave', endFooterPress);
+            
+            function startFooterPress() {
+                footerPressed = true;
+                footerPressTimer = setTimeout(() => {
+                    if (footerPressed) {
+                        triggerAdminAccess();
+                    }
+                }, 3000); // 3 seconds
+            }
+            
+            function endFooterPress() {
+                footerPressed = false;
+                clearTimeout(footerPressTimer);
+            }
+            
+            // 3. Keyboard shortcut (Ctrl+Shift+A)
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                    e.preventDefault();
+                    triggerAdminAccess();
+                }
+            });
+            
+            console.log('🔐 Hidden admin access setup complete');
+        }
+
+        function checkURLForAdminAccess() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const adminParam = urlParams.get('admin_access');
+            
+            if (adminParam === 'sipandcrunch123') {
+                triggerAdminAccess();
+                
+                // Remove parameter from URL without refreshing
+                const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                window.history.replaceState({}, document.title, newUrl);
+            }
+        }
+
+        function triggerAdminAccess() {
+            const password = prompt('Enter admin password:');
+            if (password === CONFIG.ADMIN_PASSWORD) {
+                toggleAdminPanel();
+                showNotification('Admin panel opened');
+            } else if (password) {
+                alert('Incorrect password');
+            }
+        }
+
+        // ====== DELIVERY SYSTEM ======
+        function renderPincodeList() {
+            dom.pincodeList.innerHTML = CONFIG.MUMBAI_PINCODES.map(pincode => 
+                `<span class="pincode-badge">${pincode}</span>`
+            ).join('');
+        }
+
+        function checkDeliveryAvailability() {
+            const pincode = dom.pincodeInput.value.trim();
+            
+            if (!pincode || pincode.length !== 6 || !/^\d+$/.test(pincode)) {
+                showLocationResult('error', i18n[state.currentLang]['error.invalidPincode']);
+                return;
+            }
+            
+            if (CONFIG.MUMBAI_PINCODES.includes(pincode)) {
+                state.deliveryAvailable = true;
+                state.selectedPincode = pincode;
+                
+                showLocationResult('success', i18n[state.currentLang]['delivery.available']);
+                
+                // Show checkout form
+                setTimeout(() => {
+                    dom.checkoutForm.classList.add('active');
+                    dom.customerPincode.value = pincode;
+                    
+                    // Pre-fill customer info if available
+                    if (state.customerInfo.name) {
+                        dom.customerName.value = state.customerInfo.name;
+                        dom.customerPhone.value = state.customerInfo.phone;
+                        dom.customerAddress.value = state.customerInfo.address;
+                        dom.customerLandmark.value = state.customerInfo.landmark || '';
+                    }
+                    
+                    // Scroll to form
+                    dom.checkoutForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 500);
+                
+                showNotification(i18n[state.currentLang]['success.deliveryAvailable']);
+            } else {
+                state.deliveryAvailable = false;
+                showLocationResult('error', i18n[state.currentLang]['error.deliveryNotAvailable']);
+                dom.checkoutForm.classList.remove('active');
+            }
+        }
+
+        function showLocationResult(type, message) {
+            dom.locationResult.className = `location-result ${type}`;
+            dom.locationResult.innerHTML = `
+                <p><strong>${type === 'success' ? '✅' : '❌'} ${message}</strong></p>
+                ${type === 'success' ? '<p>Please fill in your delivery details below:</p>' : ''}
+            `;
+            dom.locationResult.style.display = 'block';
+        }
+
+        function saveCustomerInfo() {
+            const customerInfo = {
+                name: dom.customerName.value.trim(),
+                phone: dom.customerPhone.value.trim(),
+                address: dom.customerAddress.value.trim(),
+                landmark: dom.customerLandmark.value.trim(),
+                pincode: dom.customerPincode.value.trim(),
+                timestamp: Date.now()
+            };
+            
+            // Basic validation
+            if (!customerInfo.name || !customerInfo.phone || !customerInfo.address || !customerInfo.pincode) {
+                showNotification('Please fill all required fields');
+                return false;
+            }
+            
+            if (customerInfo.phone.length !== 10 || !/^\d+$/.test(customerInfo.phone)) {
+                showNotification('Please enter a valid 10-digit phone number');
+                return false;
+            }
+            
+            state.customerInfo = customerInfo;
+            localStorage.setItem('customerInfo', JSON.stringify(customerInfo));
+            
+            return true;
         }
 
         // ====== LANGUAGE MANAGEMENT ======
@@ -2489,40 +2889,26 @@
             state.currentLang = lang;
             localStorage.setItem('language', lang);
             
-            // Update body class
             dom.body.classList.toggle('marathi', lang === 'mr');
             
-            // Update language buttons
             dom.langButtons.forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
             
-            // Update all translatable elements
             updateTranslations(lang);
-            
-            // Update form placeholders
             updateFormPlaceholders();
-            
-            // Re-render menu items with new language
             renderMenuItems();
-            
-            // Re-render cart items with new language
             renderCartItems();
+            updateDeliveryTexts();
             
-            // Show notification
             showNotification(lang === 'en' ? 'Language switched to English' : 'भाषा मराठीमध्ये बदलली');
-            
-            console.log(`🌐 Language set to: ${lang}`);
         }
 
         function updateTranslations(lang) {
-            // Update all elements with data-i18n attribute
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (i18n[lang] && i18n[lang][key]) {
                     el.textContent = i18n[lang][key];
-                } else {
-                    console.warn(`Missing translation for key: ${key} in language: ${lang}`);
                 }
             });
         }
@@ -2534,6 +2920,17 @@
                     el.placeholder = i18n[state.currentLang][key];
                 }
             });
+        }
+
+        function updateDeliveryTexts() {
+            // Update delivery section texts
+            if (dom.pincodeInput) {
+                dom.pincodeInput.placeholder = i18n[state.currentLang]['delivery.enterPincode'];
+            }
+            
+            if (dom.checkPincodeBtn) {
+                dom.checkPincodeBtn.innerHTML = `<i class="fas fa-search-location"></i> ${i18n[state.currentLang]['delivery.checkBtn']}`;
+            }
         }
 
         // ====== MENU MANAGEMENT ======
@@ -2598,13 +2995,8 @@
                 </div>
             `).join('');
             
-            // Re-attach event listeners for new buttons
             attachMenuEventListeners();
-            
-            // Update translations for newly rendered elements
             updateTranslations(state.currentLang);
-            
-            console.log('✅ Menu items rendered');
         }
 
         // ====== CART MANAGEMENT ======
@@ -2628,17 +3020,9 @@
                 });
             }
             
-            // Save to localStorage
             localStorage.setItem('cart', JSON.stringify(state.cart));
-            
-            // Update UI
             updateCartCount();
-            
-            // Show notification
-            const message = i18n[state.currentLang]['cart.added'];
-            showNotification(message);
-            
-            console.log(`🛒 Added ${quantity}x ${product.name} to cart`);
+            showNotification(i18n[state.currentLang]['cart.added']);
         }
 
         function updateCartCount() {
@@ -2700,10 +3084,7 @@
             dom.cartBody.innerHTML = itemsHTML;
             dom.cartTotal.textContent = `₹${total}`;
             
-            // Update translations in cart
             updateTranslations(state.currentLang);
-            
-            // Attach cart item event listeners
             attachCartItemEventListeners();
         }
 
@@ -2742,7 +3123,11 @@
                 items: [...state.cart],
                 total: orderData.amount / 100,
                 status: 'pending',
-                customerInfo: orderData.customer || {},
+                customerInfo: {
+                    ...state.customerInfo,
+                    ...orderData.customer
+                },
+                deliveryPincode: state.selectedPincode,
                 paymentId: orderData.paymentId || null,
                 canCancelUntil: Date.now() + (CONFIG.CANCEL_TIME_LIMIT * 60 * 1000)
             };
@@ -2750,7 +3135,6 @@
             state.currentOrder = order;
             localStorage.setItem('currentOrder', JSON.stringify(order));
             
-            // Add to admin notifications
             addAdminNotification({
                 type: 'new_order',
                 orderId: orderId,
@@ -2770,7 +3154,6 @@
             state.currentOrder = order;
             localStorage.setItem('currentOrder', JSON.stringify(order));
             
-            // Add cancellation notification
             addAdminNotification({
                 type: 'order_cancelled',
                 orderId: orderId,
@@ -2778,18 +3161,13 @@
                 data: order
             });
             
-            // Stop timer
             if (state.cancelTimer) {
                 clearInterval(state.cancelTimer);
             }
             
-            // Close modal
             closeOrderSuccessModal();
-            
-            // Show cancellation confirmation
             showNotification(i18n[state.currentLang]['order.cancelled']);
             
-            // In production, call backend to process refund
             console.log(`Processing refund for order: ${orderId}`);
             
             return true;
@@ -2809,7 +3187,6 @@
                     dom.orderTimer.textContent = '00:00';
                     dom.cancelOrderBtn.disabled = true;
                     dom.cancelOrderBtn.innerHTML = '<i class="fas fa-clock"></i> ' + i18n[state.currentLang]['order.cancelExpired'];
-                    showNotification(i18n[state.currentLang]['order.cancelExpired']);
                     return;
                 }
                 
@@ -2825,18 +3202,10 @@
 
         function showOrderSuccessModal(order) {
             dom.orderIdDisplay.textContent = `${i18n[state.currentLang]['order.id']}: ${order.id}`;
-            
-            // Start cancellation timer
             startCancelTimer(order.canCancelUntil);
-            
-            // Enable cancel button
             dom.cancelOrderBtn.disabled = false;
             dom.cancelOrderBtn.innerHTML = `<i class="fas fa-times-circle"></i> ${i18n[state.currentLang]['order.cancelBtn']}`;
-            
-            // Update translations
             updateTranslations(state.currentLang);
-            
-            // Show modal
             dom.orderSuccessModal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -2862,12 +3231,10 @@
             
             localStorage.setItem('adminNotifications', JSON.stringify(state.adminNotifications));
             
-            // Update admin panel if open
             if (state.adminPanelOpen) {
                 renderAdminNotifications();
             }
             
-            // Log to console for debugging
             console.log('📢 Admin Notification:', notification);
         }
 
@@ -2896,7 +3263,10 @@
                 
                 if (notif.type === 'new_order') {
                     title = i18n[lang]['admin.newOrder'];
-                    message = `${notif.data.customerInfo.name || 'Customer'} placed a new order (₹${notif.data.total})`;
+                    const customerName = notif.data.customerInfo?.name || 'Customer';
+                    const customerPhone = notif.data.customerInfo?.phone || 'N/A';
+                    const deliveryArea = notif.data.customerInfo?.pincode || 'N/A';
+                    message = `${customerName} (${customerPhone}) placed a new order for ₹${notif.data.total}. Delivery to: ${deliveryArea}`;
                     actions = `
                         <button class="notification-btn view" data-index="${index}" onclick="viewOrderDetails('${notif.orderId}')">
                             <i class="fas fa-eye"></i> ${i18n[lang]['admin.view']}
@@ -2936,8 +3306,6 @@
             
             notificationsHTML += '</div>';
             dom.adminBody.innerHTML = notificationsHTML;
-            
-            // Update translations
             updateTranslations(state.currentLang);
         }
 
@@ -2964,7 +3332,23 @@
         }
 
         function viewOrderDetails(orderId) {
-            alert(`Order Details for: ${orderId}\n\nIn a real application, this would show detailed order information.`);
+            const order = state.adminNotifications.find(n => n.orderId === orderId)?.data;
+            if (order) {
+                const details = `
+Order ID: ${order.id}
+Date: ${new Date(order.timestamp).toLocaleString()}
+Status: ${order.status}
+Total: ₹${order.total}
+Customer: ${order.customerInfo?.name || 'N/A'}
+Phone: ${order.customerInfo?.phone || 'N/A'}
+Address: ${order.customerInfo?.address || 'N/A'} ${order.customerInfo?.landmark ? `(${order.customerInfo.landmark})` : ''}
+Pincode: ${order.customerInfo?.pincode || 'N/A'}
+
+Items:
+${order.items.map(item => `  • ${item.name} x${item.quantity} - ₹${item.price * item.quantity}`).join('\n')}
+                `;
+                alert(details);
+            }
         }
 
         function toggleAdminPanel() {
@@ -2983,6 +3367,16 @@
                 return;
             }
             
+            if (!state.deliveryAvailable) {
+                showNotification('Please check delivery availability first');
+                document.getElementById('delivery').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            
+            if (!saveCustomerInfo()) {
+                return;
+            }
+            
             const total = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const description = state.cart.map(item => 
                 `${item.name} x${item.quantity}`
@@ -2990,12 +3384,13 @@
             
             try {
                 const orderData = {
-                    amount: total * 100, // Convert to paise
+                    amount: total * 100,
                     currency: "INR",
                     receipt: `order_${Date.now()}`,
                     customer: {
-                        name: document.getElementById('name')?.value || 'Customer',
-                        email: document.getElementById('email')?.value || 'customer@example.com'
+                        name: state.customerInfo.name,
+                        email: 'customer@sipandcrunch.com',
+                        phone: state.customerInfo.phone
                     }
                 };
                 
@@ -3014,7 +3409,7 @@
                     prefill: {
                         name: orderData.customer.name,
                         email: orderData.customer.email,
-                        contact: CONFIG.WHATSAPP_NUMBER
+                        contact: orderData.customer.phone
                     },
                     theme: {
                         color: "#C19A6B"
@@ -3038,21 +3433,16 @@
         function handlePaymentSuccess(response, orderData) {
             console.log('Payment success:', response);
             
-            // Create order
             orderData.paymentId = response.razorpay_payment_id;
             const order = createNewOrder(orderData);
             
-            // Clear cart
             state.cart = [];
             localStorage.setItem('cart', JSON.stringify(state.cart));
             updateCartCount();
             renderCartItems();
             closeCartModal();
             
-            // Show success modal
             showOrderSuccessModal(order);
-            
-            // Show notification
             showNotification(i18n[state.currentLang]['success.order']);
         }
 
@@ -3134,19 +3524,22 @@
             // Checkout
             dom.checkoutBtn.addEventListener('click', processCheckout);
             
+            // Delivery checkout
+            dom.deliveryCheckoutBtn.addEventListener('click', processCheckout);
+            
+            // Pincode check
+            dom.checkPincodeBtn.addEventListener('click', checkDeliveryAvailability);
+            dom.pincodeInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkDeliveryAvailability();
+                }
+            });
+            
             // Contact form
             dom.contactForm.addEventListener('submit', handleContactForm);
             
             // Admin panel
-            dom.adminAccessBtn.addEventListener('click', () => {
-                const password = prompt('Enter admin password:');
-                if (password === CONFIG.ADMIN_PASSWORD) {
-                    toggleAdminPanel();
-                } else if (password) {
-                    alert('Incorrect password');
-                }
-            });
-            
             dom.adminCloseBtn.addEventListener('click', toggleAdminPanel);
             
             // Order cancellation
@@ -3166,7 +3559,7 @@
                 }
             });
             
-            // Close order modal on overlay click
+            // Close modals on overlay click
             dom.orderSuccessModal.addEventListener('click', (e) => {
                 if (e.target === dom.orderSuccessModal) {
                     closeOrderSuccessModal();
@@ -3176,23 +3569,14 @@
             // Close with Escape key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
-                    if (state.adminPanelOpen) {
-                        toggleAdminPanel();
-                    }
-                    if (dom.orderSuccessModal.classList.contains('active')) {
-                        closeOrderSuccessModal();
-                    }
-                    if (dom.cartModal.classList.contains('active')) {
-                        closeCartModal();
-                    }
+                    if (state.adminPanelOpen) toggleAdminPanel();
+                    if (dom.orderSuccessModal.classList.contains('active')) closeOrderSuccessModal();
+                    if (dom.cartModal.classList.contains('active')) closeCartModal();
                 }
             });
-            
-            console.log('✅ Event listeners setup complete');
         }
 
         function attachMenuEventListeners() {
-            // Quantity buttons
             document.querySelectorAll('.quantity-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const itemId = this.dataset.item;
@@ -3209,13 +3593,11 @@
                 });
             });
             
-            // Add to cart buttons
             document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const productId = this.dataset.id;
                     const quantity = parseInt(document.querySelector(`.quantity-value[data-item="${productId}"]`).textContent);
                     
-                    // Get sweetness option if applicable
                     let sweetness = 'with-jaggery';
                     const product = PRODUCTS.find(p => p.id === productId);
                     if (product?.hasSweetness) {
@@ -3224,15 +3606,12 @@
                     }
                     
                     addToCart(productId, quantity, sweetness);
-                    
-                    // Reset quantity to 1
                     document.querySelector(`.quantity-value[data-item="${productId}"]`).textContent = 1;
                 });
             });
         }
 
         function attachCartItemEventListeners() {
-            // Remove buttons
             document.querySelectorAll('.remove-item').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const index = parseInt(this.dataset.index);
@@ -3244,7 +3623,6 @@
                 });
             });
             
-            // Quantity buttons in cart
             document.querySelectorAll('.cart-quantity-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const index = parseInt(this.dataset.index);
@@ -3271,7 +3649,6 @@
                             behavior: 'smooth'
                         });
                         
-                        // Update URL without scrolling
                         history.pushState(null, null, href);
                     }
                 });
@@ -3300,16 +3677,9 @@
                 message: document.getElementById('message').value
             };
             
-            // In production, you would send this to your backend
             console.log('Form submission:', formData);
-            
-            // Show success message
             showNotification(i18n[state.currentLang]['success.contact']);
-            
-            // Reset form
             dom.contactForm.reset();
-            
-            // Update placeholders
             updateFormPlaceholders();
         }
 
